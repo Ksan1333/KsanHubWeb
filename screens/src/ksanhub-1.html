@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=1120,height=800,scale=1.5">
+<title>KsanHub（PC 版）</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1120px; height: 800px; overflow: hidden; background: #F4F5F8; color: #1B2230; font: 13px/1.45 "Yu Gothic UI", "Meiryo UI", "Segoe UI", "Noto Sans CJK JP", sans-serif; padding: 20px 24px 16px; }
+  svg { display: block; }
+  .head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .head img { width: 44px; height: 44px; }
+  h1 { font-size: 22px; font-weight: 600; display: inline; }
+  .chip { background: #E9EDFB; color: #3A5BD9; border-radius: 6px; padding: 1px 7px; font: 11.5px Consolas, monospace; margin-left: 10px; vertical-align: 3px; }
+  .sub { color: #6B7383; margin-top: 2px; }
+  .acts { margin-left: auto; display: flex; gap: 8px; }
+  .btn { background: #EEF0F5; border-radius: 8px; padding: 7px 14px; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .btn.p { background: #3A5BD9; color: #fff; font-weight: 600; }
+  .btn.g { background: transparent; color: #3A5BD9; padding: 6px 10px; }
+  .btn.sm { padding: 5px 10px; font-size: 12px; }
+  .status { background: #fff; border: 1px solid #E4E7ED; border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; margin-bottom: 14px; }
+  .status .it { display: flex; align-items: center; gap: 8px; margin-right: 22px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #1F8A5B; }
+  .status .r { margin-left: auto; display: flex; gap: 4px; }
+  .tabs { display: inline-flex; background: #E8EBF1; border-radius: 11px; padding: 4px; margin-bottom: 16px; }
+  .tabs span { padding: 7px 18px; border-radius: 8px; color: #5D6676; font-size: 13.5px; display: flex; align-items: center; gap: 8px; }
+  .tabs .on { background: #fff; color: #1B2230; font-weight: 600; box-shadow: 0 1px 6px rgba(27,34,48,.10); }
+  .gh { display: flex; align-items: center; gap: 6px; margin: 2px 0 8px 4px; font-weight: 600; color: #5D6676; }
+  .gh small { color: #8A92A1; font-weight: 400; font-size: 12px; margin-left: 2px; }
+  .row { background: #fff; border: 1px solid #E6E8EE; border-radius: 10px; padding: 7px 10px; display: flex; align-items: center; gap: 12px; margin: 0 12px 6px 2px; }
+  .row img, .card img.ic { width: 32px; height: 32px; }
+  .row .n { font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .row .t { color: #6B7383; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ver { color: #8A92A1; font: 12px Consolas, monospace; white-space: nowrap; }
+  .pill { border-radius: 10px; padding: 2px 8px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+  .ok { color: #1f8a5b; background: #e3f4ec; } .up { color: #9a6a00; background: #fbf1d9; } .web { color: #2f5fc4; background: #e5ecfb; } .and { color: #6b45c9; background: #efe9fb; } .none { color: #5d6676; background: #eceef2; }
+  .chev { color: #8A92A1; }
+  .card { background: #fff; border: 1px solid #E6E8EE; border-radius: 14px; padding: 16px 18px; margin: 0 12px 10px 2px; box-shadow: 0 1px 14px rgba(27,34,48,.06); display: grid; grid-template-columns: 60px 1fr; gap: 0 16px; }
+  .card img.ic { width: 60px; height: 60px; }
+  .card .cn { font-size: 18px; font-weight: 600; }
+  .card .ct { color: #6B7383; }
+  .card ul { list-style: none; margin-top: 10px; }
+  .card li { color: #3B4456; padding-left: 17px; position: relative; margin-bottom: 3px; }
+  .card li::before { content: ""; position: absolute; left: 2px; top: .6em; width: 5px; height: 5px; border-radius: 50%; background: #9AA8E8; }
+  .stack { display: flex; gap: 6px; margin-top: 10px; }
+  .stack span { background: #F1F3F7; color: #5D6676; border-radius: 6px; padding: 1px 8px; font-size: 11.5px; }
+  .btns { grid-column: 1 / 3; border-top: 1px solid #EEF0F4; margin-top: 12px; padding-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px 8px; }
+  .btns .btn { justify-content: center; padding: 7px 4px; }
+  .btns .btn.d { background: transparent; color: #B0413E; }
+  .right { display: flex; align-items: center; gap: 10px; justify-content: space-between; }
+</style></head>
+<body>
+<div class="head">
+  <img src="../../icons/hub.png" alt="">
+  <div><h1>KsanHub</h1><span class="chip">v4.9.0</span><div class="sub">アプリ 16 本 ・ PCに入っているもの 6 本 ・ 更新あり 1 本</div></div>
+  <div class="acts"><span class="btn">↻ 最新を確認</span><span class="btn p">すべて更新</span></div>
+</div>
+<div class="status">
+  <span class="it"><i class="dot"></i>GitHub: ログイン中</span>
+  <span class="it"><i class="dot"></i>AWS: 配置用の鍵 設定済み</span>
+  <span class="it"><i class="dot"></i>バックアップ: 11/24 21:10</span>
+  <span class="r"><span class="btn g">GitHub からログアウト</span><span class="btn g">AWS の鍵を設定</span></span>
+</div>
+<div class="tabs"><span class="on">▦ アプリ</span><span>⟳ バックアップ</span><span>⚙ 設定</span></div>
+
+<div class="gh">⌄ Web（AWS） <small>4 件</small></div>
+<div class="row"><img src="../../icons/reviewinsight.png" alt=""><span class="n">ReviewInsight</span><span class="t">作業実績とレビュー指摘の記録・分析（Web版 v2）</span><span class="ver">v2.6.0</span><span class="pill ok">配置済み・最新</span><span class="btn sm">開く</span><span class="chev">⌄</span></div>
+<div class="row"><img src="../../icons/kurashi.png" alt=""><span class="n">Kurashi</span><span class="t">食事と運動の習慣を毎日記録（旧 習慣ログ）</span><span class="ver">配置 11/19 21:13</span><span class="pill up">未配置の更新あり</span><span class="btn sm">開く</span><span class="chev">⌄</span></div>
+
+<div class="gh">⌄ .NET（C#） <small>2 件</small></div>
+<div class="row"><img src="../../icons/mediashelf.png" alt=""><span class="n">MediaShelf</span><span class="t">作品単位のローカルメディア棚。サイトからの収集も（MediaPick を統合）</span><span class="ver">v2.15.0 → v2.16.0</span><span class="pill up">更新あり</span><span class="btn sm p">更新</span><span class="btn sm">起動</span><span class="chev">⌄</span></div>
+
+<div class="gh">⌄ Tauri（Rust） <small>4 件</small></div>
+<div class="card">
+  <img class="ic" src="../../icons/kiln.png" alt="">
+  <div>
+    <div class="right"><div><div class="cn">Kiln</div><div class="ct">ローカル ComfyUI 向け画像生成の出力支援</div></div><div style="display:flex;gap:10px;align-items:center"><span class="ver">v0.9.2</span><span class="pill ok" style="font-size:12px;padding:3px 10px">インストール済み</span></div></div>
+    <ul><li>依頼文からプロンプトを作り、品質タグとネガティブをベースモデル別に補う</li><li>目標枚数そろうまで自動で焼成し、破綻した画像は除外</li><li>Civitai・Hugging Face からモデルを探して ComfyUI の正しいフォルダへ自動配置</li></ul>
+    <div class="stack"><span>Tauri 2</span><span>React</span><span>Rust</span><span>SQLite</span><span>ComfyUI</span></div>
+  </div>
+  <div class="btns">
+    <span class="btn p" style="visibility:hidden">更新</span><span class="btn">起動</span><span class="btn g">フォルダを開く</span><span class="btn g">GitHub</span>
+    <span class="btn g">スタートにピン留め</span><span class="btn g">タスクバーにピン留め済</span><span class="btn g">バックアップ</span><span class="btn d">アンインストール</span>
+  </div>
+</div>
+<div class="row"><img src="../../icons/iori.png" alt=""><span class="n">Iori</span><span class="t">ローカル LLM を選ぶ・比べる・残すデスクトップチャット</span><span class="ver">v1.2.0</span><span class="pill ok">インストール済み</span><span class="btn sm">起動</span><span class="chev">⌄</span></div>
+<div class="row"><img src="../../icons/notoha.png" alt=""><span class="n">Notoha</span><span class="t">ローカルファーストのノート・Webクリップ</span><span class="ver">最新 v1.1.1</span><span class="pill none">未インストール</span><span class="btn sm p">インストール</span><span class="chev">⌄</span></div>
+
+<div class="gh">⌄ Android <small>5 件</small></div>
+<div class="row"><img src="../../icons/mediashelf-pocket.png" alt=""><span class="n">MediaShelf Pocket</span><span class="t">MediaShelf の Android 版（旧 PixVault）</span><span class="ver">最新 v3.4.0</span><span class="pill and">Android</span><span class="btn sm p">APK</span><span class="chev">⌄</span></div>
+</body></html>

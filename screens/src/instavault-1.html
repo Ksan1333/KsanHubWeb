@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=1280,height=800,scale=1.5">
+<title>InstaVault</title>
+<script src="_photo.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1280px; height: 800px; overflow: hidden; background: #0E1114; color: #EEF1F4; font: 13px/1.45 "Yu Gothic UI", "Segoe UI", "Noto Sans CJK JP", sans-serif; display: flex; }
+  .side { width: 268px; background: #121519; border-right: 1px solid #232930; padding: 16px 14px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+  .logo { width: 32px; height: 32px; border-radius: 9px; background: #111419; border: 2px solid #D5FF62; display: grid; place-items: center; }
+  .logo i { width: 12px; height: 12px; border: 2px solid #D5FF62; border-radius: 50%; display: block; }
+  .login { display: flex; align-items: center; gap: 8px; background: #161A1F; border: 1px solid #232930; border-radius: 10px; padding: 8px 10px; margin-bottom: 16px; color: #C5CCD3; }
+  .login .dot { width: 8px; height: 8px; border-radius: 50%; background: #D5FF62; }
+  .login .btn { margin-left: auto; font-size: 12px; color: #98A2AD; }
+  .sec { color: #98A2AD; font-size: 12px; margin: 4px 2px 6px; }
+  .input { height: 36px; background: #0E1114; border: 1px solid #353D46; border-radius: 9px; display: flex; align-items: center; padding: 0 10px; color: #7D8792; gap: 6px; }
+  .input b { color: #C5CCD3; font-weight: 400; }
+  .primary { height: 36px; border-radius: 9px; background: #D5FF62; color: #111419; font-weight: 700; display: grid; place-items: center; margin-top: 8px; }
+  .secondary { height: 34px; border-radius: 9px; background: #1E242B; border: 1px solid #323A43; display: grid; place-items: center; margin-top: 6px; color: #C5CCD3; }
+  .accs { margin-top: 16px; }
+  .acc { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 9px; }
+  .acc.on { background: #20262D; }
+  .acc .av { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; flex: none; border: 2px solid #232930; }
+  .acc small { display: block; color: #7D8792; font-size: 11.5px; }
+  .acc .new { margin-left: auto; background: rgba(213,255,98,.14); color: #D5FF62; border-radius: 8px; padding: 0 7px; font-size: 11.5px; }
+  .grow { flex: 1; }
+  .sfoot { display: flex; gap: 6px; border-top: 1px solid #232930; padding-top: 10px; }
+  .sfoot span { flex: 1; text-align: center; padding: 7px; border-radius: 8px; background: #161A1F; color: #C5CCD3; }
+  .main { flex: 1; min-width: 0; padding: 18px 22px; }
+  .prof { display: flex; align-items: center; gap: 18px; background: #161A1F; border: 1px solid #232930; border-radius: 14px; padding: 16px 18px; }
+  .pav { width: 76px; height: 76px; border-radius: 50%; overflow: hidden; border: 3px solid #D5FF62; flex: none; }
+  .pname { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .pname small { font-size: 12px; font-weight: 400; background: #1C2127; color: #98A2AD; border-radius: 8px; padding: 1px 8px; }
+  .pbio { color: #98A2AD; margin-top: 2px; }
+  .counts { display: flex; gap: 26px; margin-top: 10px; }
+  .counts b { font-size: 16px; }
+  .counts span { color: #98A2AD; margin-left: 4px; }
+  .pact { margin-left: auto; display: flex; flex-direction: column; gap: 8px; }
+  .pact span { height: 34px; padding: 0 16px; border-radius: 9px; display: grid; place-items: center; }
+  .pact .p { background: #D5FF62; color: #111419; font-weight: 700; }
+  .pact .s { background: #1E242B; border: 1px solid #323A43; }
+  .bar { display: flex; align-items: center; gap: 10px; margin: 16px 0 12px; }
+  .bar h2 { font-size: 15px; }
+  .bar .muted { color: #98A2AD; }
+  .sizes { display: flex; background: #161A1F; border: 1px solid #232930; border-radius: 9px; padding: 2px; margin-left: auto; }
+  .sizes span { width: 30px; height: 26px; display: grid; place-items: center; border-radius: 7px; color: #98A2AD; font-size: 12px; }
+  .sizes .on { background: #D5FF62; color: #111419; font-weight: 700; }
+  .search { width: 250px; height: 32px; border-radius: 9px; background: #0E1114; border: 1px solid #353D46; display: flex; align-items: center; padding: 0 10px; color: #7D8792; }
+  .chip { height: 32px; padding: 0 12px; border-radius: 9px; background: #1E242B; border: 1px solid #323A43; display: inline-flex; align-items: center; gap: 6px; color: #C5CCD3; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  .post { border-radius: 10px; overflow: hidden; background: #151920; border: 1px solid #232930; }
+  .post .img { height: 150px; position: relative; }
+  .post .ic { position: absolute; right: 7px; top: 7px; width: 20px; height: 20px; border-radius: 6px; background: rgba(0,0,0,.55); display: grid; place-items: center; font-size: 11px; }
+  .post .bm { position: absolute; left: 7px; top: 7px; width: 20px; height: 20px; border-radius: 6px; background: #D5FF62; display: grid; place-items: center; }
+  .post .meta { padding: 7px 9px 8px; }
+  .post .cap { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #C5CCD3; }
+  .post .info { color: #7D8792; font-size: 11.5px; display: flex; gap: 8px; margin-top: 2px; }
+  .toast { position: absolute; right: 22px; bottom: 18px; background: #1A1F25; border: 1px solid #353D46; border-radius: 12px; padding: 10px 14px; width: 300px; box-shadow: 0 8px 24px rgba(0,0,0,.4); }
+  .toast b { display: block; }
+  .prog { height: 4px; background: #2A3139; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+  .prog i { display: block; width: 64%; height: 100%; background: #D5FF62; }
+</style></head>
+<body>
+<aside class="side">
+  <div class="brand"><span class="logo"><i></i></span>InstaVault</div>
+  <div class="login"><span class="dot"></span>ログイン中<span class="btn">ログアウト</span></div>
+  <div class="sec">アカウントを保存</div>
+  <div class="input">@ <b>sample_travel_log</b></div>
+  <div class="primary">収集を開始</div>
+  <div class="secondary">新着だけ保存</div>
+  <div class="accs">
+    <div class="sec">保存したアカウント（4）</div>
+    <div class="acc on"><span class="av" data-photo="210" data-kind="mountain"></span><div>sample_travel_log<small>投稿 128 件を保存</small></div><span class="new">新着 3</span></div>
+    <div class="acc"><span class="av" data-photo="211" data-kind="food"></span><div>sample_cafe_notes<small>投稿 64 件を保存</small></div></div>
+    <div class="acc"><span class="av" data-photo="212" data-kind="city"></span><div>sample_night_walk<small>投稿 41 件を保存</small></div></div>
+    <div class="acc"><span class="av" data-photo="213" data-kind="field"></span><div>sample_garden_days<small>投稿 22 件を保存</small></div></div>
+  </div>
+  <div class="grow"></div>
+  <div class="sfoot"><span>⚙ 設定</span><span>☰ ログ</span></div>
+</aside>
+<main class="main">
+  <div class="prof">
+    <div class="pav" data-photo="210" data-kind="mountain"></div>
+    <div>
+      <div class="pname">sample_travel_log <small>架空のアカウント</small></div>
+      <div class="pbio">週末の小さな旅と、山と海の写真。</div>
+      <div class="counts"><div><b>131</b><span>投稿</span></div><div><b>2,480</b><span>フォロワー</span></div><div><b>312</b><span>フォロー中</span></div><div><b>128</b><span>保存済み</span></div></div>
+    </div>
+    <div class="pact"><span class="p">新着を保存</span><span class="s">Instagram で開く</span></div>
+  </div>
+  <div class="bar">
+    <h2>すべての投稿</h2><span class="muted">128 件</span>
+    <div class="sizes"><span>S</span><span class="on">M</span><span>L</span></div>
+    <div class="search">⌕ 本文を検索（Ctrl+F）</div>
+    <span class="chip">🔖 ブックマーク</span>
+    <span class="chip">期間 ⌄</span>
+  </div>
+  <div class="grid">
+    <div class="post"><div class="img" data-photo="220" data-kind="sea"><span class="ic">▣</span></div><div class="meta"><div class="cap">朝の海。風がやっと秋らしく</div><div class="info"><span>♥ 214</span><span>💬 8</span><span>11/24</span></div></div></div>
+    <div class="post"><div class="img" data-photo="221" data-kind="mountain"><span class="bm">🔖</span></div><div class="meta"><div class="cap">紅葉の尾根を歩いた日</div><div class="info"><span>♥ 356</span><span>💬 12</span><span>11/21</span></div></div></div>
+    <div class="post"><div class="img" data-photo="222" data-kind="food"><span class="ic">▶</span></div><div class="meta"><div class="cap">山小屋のカレー</div><div class="info"><span>♥ 198</span><span>💬 5</span><span>11/20</span></div></div></div>
+    <div class="post"><div class="img" data-photo="223" data-kind="night"></div><div class="meta"><div class="cap">星がきれいな夜だった</div><div class="info"><span>♥ 402</span><span>💬 17</span><span>11/17</span></div></div></div>
+    <div class="post"><div class="img" data-photo="224" data-kind="forest"><span class="ic">▣</span></div><div class="meta"><div class="cap">森の中の小さな滝</div><div class="info"><span>♥ 167</span><span>💬 3</span><span>11/14</span></div></div></div>
+    <div class="post"><div class="img" data-photo="225" data-kind="city"></div><div class="meta"><div class="cap">港町の夕暮れ</div><div class="info"><span>♥ 289</span><span>💬 9</span><span>11/10</span></div></div></div>
+    <div class="post"><div class="img" data-photo="226" data-kind="snow"><span class="ic">▶</span></div><div class="meta"><div class="cap">初雪のロープウェイ</div><div class="info"><span>♥ 520</span><span>💬 24</span><span>11/08</span></div></div></div>
+    <div class="post"><div class="img" data-photo="227" data-kind="field"><span class="bm">🔖</span></div><div class="meta"><div class="cap">コスモス畑</div><div class="info"><span>♥ 233</span><span>💬 6</span><span>11/03</span></div></div></div>
+    <div class="post"><div class="img" data-photo="228" data-kind="sea"></div><div class="meta"><div class="cap">島へ渡るフェリー</div><div class="info"><span>♥ 184</span><span>💬 4</span><span>10/30</span></div></div></div>
+    <div class="post"><div class="img" data-photo="229" data-kind="mountain"><span class="ic">▣</span></div><div class="meta"><div class="cap">湖に映る山</div><div class="info"><span>♥ 371</span><span>💬 11</span><span>10/26</span></div></div></div>
+  </div>
+  <div class="toast"><b>新着を保存しています</b><span style="color:#98A2AD">sample_travel_log ・ 2 / 3 件</span><div class="prog"><i></i></div></div>
+</main>
+<script>fillPhotos();</script>
+</body></html>

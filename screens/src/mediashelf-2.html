@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=1280,height=800,scale=1.5">
+<title>MediaShelf（作者別）</title>
+<script src="_photo.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1280px; height: 800px; overflow: hidden; background: #000; color: #F2F2F7; font: 13px/1.45 "Yu Gothic UI", "Segoe UI", "Noto Sans CJK JP", sans-serif; }
+  svg { display: block; }
+  .top { height: 42px; display: flex; align-items: center; gap: 8px; padding: 0 0 0 8px; }
+  .tab { height: 32px; width: 226px; background: #0B0B0C; border-radius: 9px; display: flex; align-items: center; gap: 8px; padding: 0 10px; font-size: 14px; }
+  .tab .ic { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(#FF5E7E, #E0314F); }
+  .plus { width: 24px; height: 24px; border-radius: 50%; background: #2C2C2E; display: grid; place-items: center; color: #D1D1D6; font-size: 16px; }
+  .winctl { margin-left: auto; display: flex; height: 42px; }
+  .winctl span { width: 46px; display: grid; place-items: center; color: #D1D1D6; }
+  .body { position: absolute; top: 46px; left: 8px; right: 0; bottom: 0; display: flex; }
+  .side { width: 224px; background: #1C1C1E; border-radius: 16px; padding: 12px 10px; display: flex; flex-direction: column; margin-bottom: 8px; }
+  .brand { height: 42px; border-radius: 12px; background: linear-gradient(90deg, #2F6BEF, #4E86F7); display: flex; align-items: center; gap: 10px; padding: 0 10px; font-weight: 700; font-size: 15px; margin-bottom: 10px; box-shadow: 0 4px 14px rgba(47,107,239,.35); }
+  .brand i { width: 26px; height: 26px; border-radius: 7px; background: rgba(255,255,255,.22); display: grid; place-items: center; }
+  .label { font-size: 11.5px; color: #98989F; margin: 10px 6px 4px; }
+  .nav { height: 36px; border-radius: 10px; display: flex; align-items: center; gap: 10px; padding: 0 8px; font-size: 14px; }
+  .nav.on { background: #1E3550; color: #7FB4FF; }
+  .tile { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; color: #fff; }
+  .grow { flex: 1; }
+  .foot { border-top: 1px solid #2C2C2E; padding-top: 8px; }
+  .ver { color: #8E8E93; font-size: 11.5px; margin: 6px 8px 0; }
+  .main { flex: 1; min-width: 0; padding: 4px 18px 0 24px; position: relative; }
+  .head { display: flex; align-items: center; gap: 10px; height: 46px; }
+  .head h1 { font-size: 21px; font-weight: 700; }
+  .muted { color: #98989F; }
+  .seg { margin-left: auto; display: flex; background: #1C1C1E; border-radius: 10px; padding: 3px; }
+  .seg span { width: 34px; height: 30px; border-radius: 8px; display: grid; place-items: center; color: #AEAEB2; }
+  .seg span.on { background: #3A3A3C; color: #fff; }
+  .pill { height: 36px; padding: 0 14px; border-radius: 18px; background: #1C1C1E; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .filters { display: flex; gap: 8px; margin: 8px 0 14px; }
+  .search { width: 198px; height: 34px; border-radius: 17px; background: #1C1C1E; display: flex; align-items: center; gap: 8px; padding: 0 12px; color: #8E8E93; }
+  .filters .pill { height: 34px; }
+  .content { display: flex; gap: 18px; }
+  .grid-wrap { flex: 1; min-width: 0; }
+  .group { display: flex; align-items: center; gap: 10px; margin: 4px 0 12px; font-weight: 700; font-size: 14px; }
+  .group b { background: #1E3550; color: #7FB4FF; border-radius: 9px; padding: 0 8px; font-size: 12px; }
+  .group hr { flex: 1; border: 0; border-top: 1px solid #2C2C2E; }
+  .grid { display: grid; grid-template-columns: repeat(4, 122px); gap: 16px 17px; margin-bottom: 14px; }
+  .card .th { width: 122px; height: 92px; border-radius: 9px; overflow: hidden; position: relative; background: #2C2C2E; border: 1px solid #3A3A3C; }
+  .card.sel .th { outline: 2px solid #3478F6; outline-offset: 1px; }
+  .card .t { font-weight: 700; font-size: 12.5px; margin-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card .m { color: #98989F; font-size: 11.5px; }
+  .badge { position: absolute; left: 5px; bottom: 5px; display: flex; gap: 4px; }
+  .badge span { background: rgba(0,0,0,.6); border-radius: 9px; padding: 0 6px; font-size: 11px; }
+  .vid { position: absolute; right: 5px; top: 5px; background: rgba(0,0,0,.6); border-radius: 8px; padding: 0 6px; font-size: 11px; }
+  .check { position: absolute; right: 6px; top: 6px; width: 20px; height: 20px; border-radius: 50%; background: #3478F6; display: grid; place-items: center; }
+  .details { width: 300px; background: #1C1C1E; border-radius: 16px; padding: 14px; height: 600px; flex: none; }
+  .details h2 { font-size: 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .close { width: 26px; height: 26px; border-radius: 50%; background: #2C2C2E; display: grid; place-items: center; color: #AEAEB2; font-size: 13px; }
+  .preview { height: 170px; border-radius: 10px; overflow: hidden; }
+  .dt { font-weight: 700; font-size: 15px; margin: 12px 0 2px; }
+  .stars { color: #FFD60A; letter-spacing: 1px; }
+  .kv { margin-top: 10px; }
+  .kv div { color: #98989F; font-size: 12px; margin-top: 8px; }
+  .kv p { font-size: 13px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .tags span { background: #2C2C2E; border-radius: 8px; padding: 1px 8px; font-size: 12px; }
+  .status { position: absolute; left: 232px; right: 0; bottom: 0; height: 34px; border-top: 1px solid #1C1C1E; display: flex; align-items: center; gap: 10px; padding: 0 16px 0 24px; color: #AEAEB2; font-size: 12.5px; background: #000; }
+  .status i { width: 7px; height: 7px; border-radius: 50%; background: #3478F6; }
+  .status .pill { margin-left: auto; height: 26px; font-size: 12px; padding: 0 12px; }
+
+  .cols { display: flex; gap: 14px; height: 692px; }
+  .list { width: 316px; background: #1C1C1E; border-radius: 16px; padding: 14px; flex: none; }
+  .lh { display: flex; align-items: center; gap: 8px; font-size: 15px; margin-bottom: 10px; }
+  .lh .add { margin-left: auto; width: 30px; height: 30px; border-radius: 50%; background: #3478F6; display: grid; place-items: center; font-size: 16px; }
+  .search.wide { width: 100%; }
+  .chips { display: flex; gap: 6px; margin: 10px 0 12px; flex-wrap: wrap; }
+  .chips span { border: 1px solid #3A3A3C; border-radius: 14px; padding: 2px 10px; font-size: 12.5px; }
+  .chips span.on { border-color: #3478F6; color: #7FB4FF; background: #16273D; }
+  .person { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 10px; margin-bottom: 4px; }
+  .person.on { background: #16273D; outline: 1px solid #3478F6; }
+  .person small, .ur small { display: block; color: #98989F; font-size: 11.5px; }
+  .person em { margin-left: auto; font-style: normal; color: #7FB4FF; font-size: 12px; }
+  .av { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; flex: none; }
+  .av.big { width: 72px; height: 72px; font-size: 30px; }
+  .unreg { border-top: 1px solid #2C2C2E; margin-top: 150px; padding-top: 10px; }
+  .ur { display: flex; align-items: center; justify-content: space-between; padding: 6px 4px; }
+  .pill.sm { height: 28px; font-size: 12.5px; padding: 0 12px; background: #2C2C2E; }
+  .pill.blue { background: #2F6BEF; color: #fff; }
+  .detail { flex: 1; min-width: 0; }
+  .prof { background: #1C1C1E; border-radius: 16px; padding: 16px; display: flex; gap: 16px; }
+  .pinfo { flex: 1; min-width: 0; }
+  .pn { font-size: 21px; font-weight: 700; }
+  .pn small { font-size: 12.5px; font-weight: 400; }
+  .ptags { display: flex; gap: 6px; margin-top: 4px; }
+  .ptags span { background: #2C2C2E; border-radius: 6px; padding: 0 8px; font-size: 12px; }
+  .acts { display: flex; gap: 8px; }
+  .acts .pill { height: 30px; font-size: 12.5px; background: #2C2C2E; }
+  .acts .pill.blue { background: #2F6BEF; }
+  .stats { display: flex; gap: 22px; }
+  .stats b { display: block; font-size: 19px; }
+  .stats small { color: #98989F; font-size: 12px; }
+  .sh { display: flex; align-items: center; gap: 12px; margin: 16px 0 10px; }
+  .sh .r, .tabs2 .r { margin-left: auto; }
+  .accs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .acc { background: #1C1C1E; border-radius: 12px; padding: 12px; }
+  .ab { display: flex; gap: 8px; margin-top: 10px; }
+  .ab .pill { flex: 1; justify-content: center; }
+  .tabs2 { display: flex; gap: 22px; border-bottom: 1px solid #2C2C2E; margin: 18px 0 12px; padding-bottom: 8px; font-size: 14px; }
+  .tabs2 .on { font-weight: 700; border-bottom: 2px solid #3478F6; padding-bottom: 6px; margin-bottom: -9px; }
+  .thumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+  .thumbs div { height: 96px; border-radius: 8px; overflow: hidden; }
+</style></head>
+<body>
+<div class="top">
+  <div class="tab"><span class="ic" style="background:linear-gradient(#3DD16B,#20A64B)"></span>作者別</div>
+  <div class="plus">+</div>
+  <div class="winctl"><span><svg width="10" height="10"><path d="M0 5h10" stroke="#ccc"/></svg></span><span><svg width="10" height="10"><rect x=".5" y=".5" width="9" height="9" fill="none" stroke="#ccc"/></svg></span><span><svg width="10" height="10"><path d="M0 0l10 10M10 0L0 10" stroke="#ccc"/></svg></span></div>
+</div>
+<div class="body">
+  <aside class="side">
+    <div class="brand"><i><svg width="16" height="16" viewBox="0 0 16 16"><path d="M2 13V4h2v9M5.5 13V3h2v10M9 13l2.2-9 1.9.5-2.2 9z" fill="#fff"/><path d="M1 13.5h14" stroke="#fff" stroke-width="1.4"/></svg></i>MediaShelf</div>
+    <div class="nav"><span class="tile" style="background:#3478F6">⌂</span>ホーム</div>
+    <div class="label">ライブラリ</div>
+    <div class="nav"><span class="tile" style="background:#FF9F0A"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 3.5h4l1.2 1.3H13v6.7H1z" fill="none" stroke="#fff" stroke-width="1.3"/></svg></span>フォルダー</div>
+    <div class="nav"><span class="tile" style="background:#14A3A3"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 12V3M5 12V3M8 12l2-9 2 .5-2 9" stroke="#fff" stroke-width="1.4" fill="none"/></svg></span>メディア別</div>
+    <div class="nav on"><span class="tile" style="background:#34C759"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="5" r="2.4" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M2.5 12.5c.8-2.4 2.5-3.5 4.5-3.5s3.7 1.1 4.5 3.5" fill="none" stroke="#fff" stroke-width="1.3"/></svg></span>作者別</div>
+    <div class="nav"><span class="tile" style="background:#E8A317"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1.5 7.2V2h5.2l5.8 5.8-5.2 5.2z" fill="none" stroke="#fff" stroke-width="1.3"/><circle cx="4.3" cy="4.6" r="1" fill="#fff"/></svg></span>タグ別</div>
+    <div class="label">集める</div>
+    <div class="nav"><span class="tile" style="background:#1BA6C9"><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M1.5 7h11M7 1.5c2 2 2 9 0 11M7 1.5c-2 2-2 9 0 11" fill="none" stroke="#fff" stroke-width="1.1"/></svg></span>サイト</div>
+    <div class="nav"><span class="tile" style="background:#30B65A"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 2v8M3.5 6.8 7 10.2l3.5-3.4M2 12.5h10" fill="none" stroke="#fff" stroke-width="1.4"/></svg></span>ダウンロード</div>
+    <div class="label">ツール</div>
+    <div class="nav"><span class="tile" style="background:#6E5CE6"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1.5" y="3" width="11" height="8" rx="1.5" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M1.8 3.6 7 7.6l5.2-4" fill="none" stroke="#fff" stroke-width="1.2"/></svg></span>新着の整理</div>
+    <div class="nav"><span class="tile" style="background:#2AA9E0"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M11.5 5A5 5 0 0 0 2.7 4.2M2.5 9a5 5 0 0 0 8.8.8" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M11.8 2v3.2H8.6M2.2 12V8.8h3.2" fill="none" stroke="#fff" stroke-width="1.3"/></svg></span>バックアップ</div>
+    <div class="nav"><span class="tile" style="background:#FF6259"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1.5" y="4" width="7.5" height="8.5" rx="1.4" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M5 2h6.2c.8 0 1.3.5 1.3 1.3V10" fill="none" stroke="#fff" stroke-width="1.3"/></svg></span>重複</div>
+    <div class="grow"></div>
+    <div class="foot"><div class="nav"><span class="tile" style="background:#636366">⚙</span>設定</div><div class="ver">v2.16.0</div></div>
+  </aside>
+  <main class="main">
+    <div class="head"><h1>作者別</h1></div>
+    <div class="cols">
+      <section class="list">
+        <div class="lh"><b>作者</b> <span class="muted">4 人</span><span class="add">＋</span></div>
+        <div class="search wide">⌕ 名前・アカウント・タグで探す</div>
+        <div class="chips"><span class="on">すべて 4</span><span>お気に入り 1</span><span>新着 2</span><span>未登録 1</span></div>
+        <div class="person on"><span class="av" style="background:#C0392B">架</span><div><b>架空作家A</b> <span style="color:#FFD60A">★</span><small>イラスト ・ 30_illust ・ 18 件</small></div><em>+3</em></div>
+        <div class="person"><span class="av" style="background:#2E5E8C">架</span><div><b>架空作家B</b><small>写真 ・ 50_photo ・ 7 件</small></div><em>+1</em></div>
+        <div class="person"><span class="av" style="background:#6A4FC8">架</span><div><b>架空サークルC</b><small>マンガ ・ 20_manga ・ 4 件</small></div></div>
+        <div class="person"><span class="av" style="background:#4E7A50">架</span><div><b>架空作家D</b><small>未登録 ・ 1 件</small></div></div>
+        <div class="unreg"><div class="muted" style="font-size:12px;margin-bottom:6px">未登録の作者（@tmp）・2</div>
+          <div class="ur"><div><b>架空の投稿者</b><small>example_fan@tmp ・ 2 件</small></div><span class="pill sm">登録</span></div>
+          <div class="ur"><div><b>架空サークルQ</b><small>circle_q@tmp ・ 1 件</small></div><span class="pill sm">登録</span></div>
+        </div>
+      </section>
+      <section class="detail">
+        <div class="prof">
+          <span class="av big" style="background:#C0392B">架</span>
+          <div class="pinfo"><div class="pn">架空作家A <span style="color:#FFD60A">★</span> <small class="muted">イラスト</small></div>
+            <div class="ptags"><span>#オリジナル</span><span>#風景</span><span>#水彩</span></div>
+            <div class="muted" style="margin:4px 0 10px">メモ：毎月はじめにまとめて投稿。風景の連作が多い。</div>
+            <div class="acts"><span class="pill blue">✓ 確認済みにする</span><span class="pill">⌕ 名前で探す</span><span class="pill">✎ 編集</span></div></div>
+          <div class="stats"><div><b>18</b><small>手元の作品</small></div><div><b>2.4 GB</b><small>容量</small></div><div><b style="color:#5AA2FF">5</b><small>サイトの未保存</small></div></div>
+        </div>
+        <div class="sh"><b>アカウント（3）</b><span class="muted">「サイトで開く」「全部保存」は集めるの画面で開きます</span><span class="pill sm r">＋ アカウントを足す</span></div>
+        <div class="accs">
+          <div class="acc"><div><b>Pawchive</b> <span class="muted">fanbox.20000002</span></div><div class="ab"><span class="pill sm">サイトで開く</span><span class="pill sm blue">全部保存</span></div></div>
+          <div class="acc"><div><b>ArtNest</b> <span class="muted">10000001</span></div><div class="ab"><span class="pill sm">サイトで開く</span><span class="pill sm blue">全部保存</span></div></div>
+          <div class="acc"><div><b>Pictlog</b> <span class="muted">fic_artist_a</span></div><div class="ab"><span class="pill sm">サイトで開く</span><span class="pill sm">再読み込み</span></div></div>
+        </div>
+        <div class="tabs2"><span class="on">メディア別（18）</span><span>サイトの作品（23）</span><span class="r muted">▭ フォルダーを開く　↻ 再走査</span></div>
+        <div class="thumbs">
+          <div data-photo="101" data-kind="mountain"></div><div data-photo="102" data-kind="sea"></div><div data-photo="103" data-kind="field"></div><div data-photo="104" data-kind="forest"></div><div data-photo="105" data-kind="night"></div><div data-photo="106" data-kind="snow"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<div class="status"><i></i>サイトの新着 5 件（架空作家A）を集めるで保存できます<span class="pill">集めるを開く</span></div>
+<script>fillPhotos();</script>
+</body></html>

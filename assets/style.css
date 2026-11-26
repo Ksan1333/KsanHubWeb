@@ -1,0 +1,248 @@
+/* KsanHub（Web 版）。見た目は PC 版（WPF）のアプリ一覧に合わせる（MainWindow.xaml の色・角丸・余白）。
+   説明の文字は 13px 以上。地の色と文字の色は近づけない。 */
+
+:root {
+  --bg: #F4F5F8;
+  --ink: #1B2230;
+  --muted: #6B7383;
+  --faint: #8A92A1;
+  --line: #E4E7ED;
+  --card-line: #E6E8EE;
+  --accent: #3A5BD9;
+  --font: "Yu Gothic UI", "Meiryo UI", "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Noto Sans CJK JP", system-ui, sans-serif;
+  --mono: Consolas, "Cascadia Mono", "SFMono-Regular", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+button { font: inherit; color: inherit; }
+a { color: var(--accent); }
+img { display: block; }
+[hidden] { display: none !important; }
+
+.page { max-width: 1120px; margin: 0 auto; padding: 20px 24px 28px; }
+
+/* ---------- 見出し ---------- */
+.top { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.hub-icon { width: 44px; height: 44px; flex: none; }
+.title-row { display: flex; align-items: center; gap: 10px; }
+.top h1 { margin: 0; font-size: 22px; font-weight: 600; line-height: 1.25; }
+.version-chip {
+  margin-top: 3px; background: #E9EDFB; color: var(--accent); border-radius: 6px;
+  padding: 1px 7px; font: 11.5px/1.5 var(--mono);
+}
+.sub { margin: 2px 0 0; color: var(--muted); }
+
+/* GitHub / AWS の状態の帯の位置に、この Web 版の説明を出す */
+.status {
+  display: flex; flex-wrap: wrap; gap: 4px 22px; align-items: center;
+  background: #FFFFFF; border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px 14px; margin-bottom: 18px;
+}
+.status-item { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #B7BDC8; flex: none; }
+.dot-blue { background: var(--accent); }
+.dot-green { background: #1F8A5B; }
+
+/* ---------- 一覧 ---------- */
+.group { margin-bottom: 6px; }
+.group-head {
+  display: inline-flex; align-items: center; gap: 0; margin: 2px 0 8px;
+  padding: 3px 10px 3px 4px; border: 0; border-radius: 6px; background: transparent; cursor: pointer;
+}
+.group-head:hover { background: #EAEDF3; }
+.group-head:focus-visible, .row:focus-visible, .card-head:focus-visible, .shot-tab:focus-visible, .frame:focus-visible, .btn:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+.chev { width: 14px; height: 14px; margin-right: 6px; color: var(--muted); transition: transform .15s; flex: none; }
+.group-head[aria-expanded="false"] .chev { transform: rotate(-90deg); }
+.group-title { font-size: 13px; font-weight: 600; color: #5D6676; }
+.group-count { font-size: 12px; color: var(--faint); margin-left: 8px; }
+.group-items { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+
+/* 1 アプリ 1 行（PC 版の CompactTemplate） */
+.row {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  background: #FFFFFF; border: 1px solid var(--card-line); border-radius: 10px;
+  padding: 7px 10px; cursor: pointer;
+}
+.row:hover { background: #F7F8FC; }
+.row.ended { background: #FAFBFC; }
+.row.ended:hover { background: #F3F5F9; }
+.app-icon { width: 32px; height: 32px; border-radius: 8px; flex: none; object-fit: contain; }
+.app-icon.fallback {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #FFFFFF; font-size: 15px; font-weight: 600;
+}
+.row-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px; }
+.row-name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+.row.ended .row-name { color: #3B4456; }
+.row-tagline { color: var(--muted); min-width: 0; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row-version { color: var(--faint); font: 12px var(--mono); white-space: nowrap; }
+.pill {
+  display: inline-block; border-radius: 10px; padding: 2px 8px;
+  font-size: 11.5px; font-weight: 600; white-space: nowrap; line-height: 1.5;
+}
+.row-shots { color: var(--faint); font-size: 12px; white-space: nowrap; display: inline-flex; align-items: center; gap: 5px; }
+.row-shots svg { width: 14px; height: 14px; }
+.row-chev { width: 12px; height: 12px; color: var(--faint); margin: 0 4px 0 2px; flex: none; }
+
+/* 小さいボタン（行の「開く」） */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 0; border-radius: 8px; background: #EEF0F5; color: var(--ink);
+  padding: 7px 14px; font-size: 13px; cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.btn:hover { background: #E2E6EE; }
+.btn.small { padding: 5px 10px; font-size: 12px; }
+.btn.primary { background: var(--accent); color: #FFFFFF; font-weight: 600; }
+.btn.primary:hover { background: #2F4DC4; }
+
+/* ---------- 開いたカード（PC 版の CardTemplate） ---------- */
+.card {
+  background: #FFFFFF; border: 1px solid var(--card-line); border-radius: 14px;
+  box-shadow: 0 1px 14px rgba(27, 34, 48, .06);
+  padding: 16px 18px; scroll-margin-top: 12px;
+}
+.card-head {
+  display: flex; align-items: flex-start; gap: 16px; width: 100%;
+  border: 0; background: transparent; padding: 0; text-align: left; cursor: pointer;
+}
+.card-head .app-icon { width: 60px; height: 60px; border-radius: 14px; }
+.card-head .app-icon.fallback { font-size: 26px; }
+.card-title { flex: 1; min-width: 0; }
+.card-name { display: block; font-size: 18px; font-weight: 600; line-height: 1.35; }
+.card-tagline { display: block; color: var(--muted); margin-top: 1px; }
+.card-side { display: flex; align-items: center; gap: 10px; flex: none; }
+.card-side .pill { font-size: 12px; padding: 3px 10px; border-radius: 11px; }
+.card-side .row-chev { transform: rotate(180deg); }
+
+.card-body {
+  display: grid; gap: 18px 24px; margin-top: 16px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: start;
+}
+.card-body.tall { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr); }
+.card-body.noshots { grid-template-columns: minmax(0, 1fr); margin-left: 76px; margin-top: 4px; }
+
+/* 画面の例 */
+.shots { min-width: 0; }
+.shots-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+.shots-label { font-size: 13px; font-weight: 600; color: #2E3A55; }
+.shot-tabs { display: inline-flex; flex-wrap: wrap; gap: 2px; background: #E8EBF1; border-radius: 11px; padding: 4px; }
+.shot-tab {
+  border: 0; background: transparent; border-radius: 8px; padding: 5px 12px;
+  color: #5D6676; font-size: 13px; cursor: pointer;
+}
+.shot-tab:hover { color: var(--ink); }
+.shot-tab[aria-selected="true"] { background: #FFFFFF; color: var(--ink); font-weight: 600; box-shadow: 0 1px 4px rgba(27, 34, 48, .12); }
+
+.stage { display: flex; justify-content: center; background: #EEF1F6; border-radius: 12px; padding: 16px; }
+.frame {
+  position: relative; display: block; border: 0; padding: 0; background: transparent;
+  cursor: zoom-in; max-width: 100%;
+}
+.frame > span { display: block; }
+.frame img { width: 100%; height: auto; }
+.frame-bare img, .frame-window, .frame-browser { border-radius: 8px; }
+.frame-bare img { box-shadow: 0 6px 24px rgba(15, 20, 30, .22), 0 0 0 1px rgba(15, 20, 30, .18); }
+.frame-window, .frame-browser { overflow: hidden; box-shadow: 0 6px 24px rgba(15, 20, 30, .22), 0 0 0 1px rgba(15, 20, 30, .18); width: 100%; }
+.win-bar, .browser-bar { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 0 0 10px; font-size: 12px; }
+.win-bar { background: #F3F3F3; color: #1B1B1B; }
+.frame-window.dark .win-bar { background: #202020; color: #E8E8E8; }
+.win-bar img { width: 16px; height: 16px; }
+.win-bar .win-title { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.win-ctl { display: flex; height: 100%; }
+.win-ctl span { width: 40px; display: inline-flex; align-items: center; justify-content: center; }
+.win-ctl svg { width: 10px; height: 10px; }
+.browser-bar { background: #DEE1E6; gap: 10px; padding: 0 12px; height: 34px; }
+.browser-dots { display: flex; gap: 6px; }
+.browser-dots i { width: 10px; height: 10px; border-radius: 50%; background: #C3C7CE; display: block; }
+.browser-url {
+  flex: 1; min-width: 0; height: 22px; border-radius: 11px; background: #FFFFFF; color: #5F6368;
+  display: flex; align-items: center; padding: 0 12px; font-size: 12px; white-space: nowrap; overflow: hidden;
+}
+.frame-phone, .frame-land {
+  background: #101114; border-radius: 34px; padding: 10px;
+  box-shadow: 0 10px 30px rgba(15, 20, 30, .28), inset 0 0 0 2px #2A2C31;
+}
+.frame-phone { width: min(100%, 300px); }
+.frame-phone img { border-radius: 25px; }
+.frame-land { border-radius: 28px; padding: 9px 12px; width: 100%; }
+.frame-land img { border-radius: 18px; }
+.shot-caption { margin-top: 10px; color: var(--muted); font-size: 13px; text-align: center; }
+.shot-caption .kind { display: inline-block; margin-right: 8px; border-radius: 6px; padding: 0 7px; background: #F1F3F7; color: #5D6676; font-size: 12px; }
+.shot-caption .kind.real { background: #E3F4EC; color: #1F8A5B; }
+
+/* 説明（特徴・技術・使うのに必要なもの・補足） */
+.info { min-width: 0; }
+.features { list-style: none; margin: 0; padding: 0; }
+.features li { position: relative; padding-left: 17px; margin: 0 0 4px; color: #3B4456; }
+.features li::before {
+  content: ""; position: absolute; left: 2px; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: #9AA8E8;
+}
+.ended-card .features li::before { background: #A7AEBB; }
+.stack { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.stack li { background: #F1F3F7; color: #5D6676; border-radius: 6px; padding: 1px 8px; font-size: 12px; }
+.spec { background: #F3F6FC; border: 1px solid #DCE3F3; border-radius: 10px; padding: 9px 12px 8px; margin: 12px 0 8px; }
+.spec-title { font-weight: 600; color: #2E3A55; margin-bottom: 4px; }
+.spec-row { display: flex; gap: 8px; margin: 2px 0; }
+.spec-label { width: 60px; flex: none; font-weight: 600; color: #4A556B; }
+.spec-text { color: #2F3747; min-width: 0; overflow-wrap: anywhere; }
+.details { margin: 0; padding: 0; list-style: none; }
+.details li { color: #5D6676; margin: 2px 0; overflow-wrap: anywhere; }
+.note { color: var(--faint); margin: 8px 0 0; }
+.card-actions { border-top: 1px solid #EEF0F4; margin-top: 14px; padding-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; }
+
+.foot { margin-top: 22px; color: var(--muted); text-align: center; font-size: 13px; }
+
+/* ---------- 画面を大きく見る ---------- */
+.viewer {
+  position: fixed; inset: 0; z-index: 50; background: rgba(12, 14, 19, .94);
+  display: flex; flex-direction: column; color: #F2F4F8;
+}
+.viewer-top { display: flex; align-items: center; gap: 12px; padding: 10px 12px 6px 20px; }
+.viewer-title { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viewer-btn, .viewer-nav {
+  border: 0; background: rgba(255, 255, 255, .10); color: #FFFFFF; border-radius: 50%;
+  width: 42px; height: 42px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex: none;
+}
+.viewer-btn:hover, .viewer-nav:hover { background: rgba(255, 255, 255, .2); }
+.viewer-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 4px 12px; }
+.viewer-stage img { max-width: calc(100% - 120px); max-height: 100%; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0, 0, 0, .5); }
+.viewer-caption { text-align: center; padding: 8px 16px 16px; color: #C9CED8; font-size: 13px; }
+.viewer-caption .kind { display: inline-block; margin-right: 8px; border-radius: 6px; padding: 0 7px; background: rgba(255,255,255,.12); color: #E6E9EF; font-size: 12px; }
+.viewer-caption .kind.real { background: rgba(48,190,120,.22); color: #9BE3BD; }
+
+/* ---------- 狭い画面 ---------- */
+@media (max-width: 900px) {
+  .card-body, .card-body.tall { grid-template-columns: minmax(0, 1fr); }
+  .card-body.noshots { margin-left: 0; }
+  .row-version { display: none; }
+}
+@media (max-width: 640px) {
+  .page { padding: 14px 12px 24px; }
+  .row-main { flex-direction: column; align-items: stretch; gap: 0; }
+  .row { gap: 10px; }
+  .row .pill { font-size: 11px; padding: 2px 7px; }
+  .row-tagline { width: 100%; font-size: 13px; }
+  .row-shots, .row .btn.small { display: none; }
+  .card { padding: 14px 14px; }
+  .card-head { gap: 12px; }
+  .card-head .app-icon { width: 48px; height: 48px; border-radius: 12px; }
+  .card-side .pill { display: none; }
+  .stage { padding: 12px 8px; }
+  .viewer-stage { padding: 4px 0; gap: 0; }
+  .viewer-stage img { max-width: 100%; border-radius: 0; }
+  .viewer-nav { position: absolute; bottom: 64px; }
+  .viewer-nav.prev { left: 16px; }
+  .viewer-nav.next { right: 16px; }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "ksanhub-web",
+  "private": true,
+  "type": "module",
+  "description": "KsanHub の Web 版（GitHub Pages で見るだけのアプリ一覧と画面の例）",
+  "scripts": {
+    "sync": "node tools/sync-catalog.mjs",
+    "check": "node tools/sync-catalog.mjs --check",
+    "shoot": "node tools/shoot.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.63.0",
+    "sharp": "^0.35.4"
+  }
+}

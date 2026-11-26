@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=390,height=844,scale=2">
+<title>Basho（Web版）ホーム</title>
+<script src="_photo.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 390px; height: 844px; overflow: hidden; background: #FFFDF6; color: #3A3226; font: 15px/1.5 "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans CJK JP", sans-serif; padding: 18px 20px; }
+  .top { display: flex; align-items: center; gap: 10px; }
+  .logo { width: 40px; height: 40px; border-radius: 11px; background: #F2C230; display: grid; place-items: center; }
+  .brand { font-size: 24px; font-weight: 700; letter-spacing: .04em; }
+  .me { margin-left: auto; width: 42px; height: 42px; border-radius: 50%; background: #F6EEDB; display: grid; place-items: center; font-weight: 700; }
+  h1 { font-size: 28px; margin-top: 18px; }
+  .sub { color: #6B6253; font-size: 13px; }
+  .hero { margin-top: 14px; border: 1px solid #E5DCC6; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: 0 4px 0 #EFE6D2; }
+  .hero .ph { height: 150px; position: relative; }
+  .hero .tags { position: absolute; left: 14px; bottom: 12px; display: flex; gap: 6px; }
+  .hero .tags span { background: #fff; border-radius: 999px; padding: 2px 12px; font-size: 13px; font-weight: 700; }
+  .hero .tags .dk { background: #3A3226; color: #fff; }
+  .hero .bd { padding: 12px 16px 14px; }
+  .hero h2 { font-size: 21px; }
+  .hero .d { color: #6B6253; font-size: 13px; }
+  .stats3 { display: flex; gap: 8px; margin: 10px 0 12px; }
+  .stats3 div { flex: 1; background: #F6EEDB; border-radius: 12px; padding: 6px 10px; }
+  .stats3 b { display: block; font-size: 17px; } .stats3 small { color: #6B6253; font-size: 12px; }
+  .open { background: #F2C230; border-radius: 999px; text-align: center; padding: 10px; font-weight: 700; box-shadow: 0 3px 0 #D9A916; }
+  .sec { font-size: 15px; font-weight: 700; margin: 18px 0 8px; }
+  .trip { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #E5DCC6; border-radius: 16px; padding: 8px; margin-bottom: 8px; }
+  .trip .th { width: 56px; height: 56px; border-radius: 12px; overflow: hidden; flex: none; }
+  .trip small { display: block; color: #6B6253; font-size: 12.5px; }
+  .trip .rt { white-space: nowrap; margin-left: auto; background: #FFF4CC; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 700; }
+  .rec { display: flex; gap: 8px; }
+  .rec div { flex: 1; background: #fff; border: 1px solid #E5DCC6; border-radius: 14px; padding: 8px 10px; }
+  .rec b { display: block; font-size: 18px; } .rec small { color: #6B6253; font-size: 12px; }
+</style></head>
+<body>
+<div class="top"><span class="logo"><svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="#fff" stroke-width="3.2" stroke-dasharray="40 10" transform="rotate(30 12 12)"/><path d="M12 8.2a2.6 2.6 0 0 1 2.6 2.6c0 1.8-2.6 4.6-2.6 4.6s-2.6-2.8-2.6-4.6A2.6 2.6 0 0 1 12 8.2z" fill="#3A3226"/></svg></span><span class="brand">Basho</span><span class="me">旅</span></div>
+<h1>旅の記録</h1>
+<div class="sub">オーナー ・ 参加している旅 4</div>
+<div class="hero">
+  <div class="ph" data-photo="601" data-kind="sea"><div class="tags"><span>編集できる</span><span class="dk">旅行中</span></div></div>
+  <div class="bd">
+    <h2>海沿いの町 2泊3日</h2>
+    <div class="d">2026/11/21 – 11/23 ・ 仲間 3 人</div>
+    <div class="stats3"><div><b>64</b><small>写真</small></div><div><b>8</b><small>訪問先（か所）</small></div><div><b>¥86,400</b><small>支払い</small></div></div>
+    <div class="open">旅行を開く →</div>
+  </div>
+</div>
+<div class="sec">ほかの旅</div>
+<div class="trip"><span class="th" data-photo="602" data-kind="mountain"></span><div><b>紅葉の山あるき</b><small>2026/11/08 – 11/09 ・ 写真 38 枚</small></div><span class="rt">見るだけ</span></div>
+<div class="trip"><span class="th" data-photo="603" data-kind="city"></span><div><b>夜景めぐり</b><small>2026/10/12 ・ 写真 21 枚</small></div><span class="rt">編集できる</span></div>
+<div class="sec">これまでの記録</div>
+<div class="rec"><div><b>6</b><small>旅行</small></div><div><b>412</b><small>写真</small></div><div><b>¥318,700</b><small>支払い</small></div></div>
+<script>fillPhotos();</script>
+</body></html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=1200,height=675,scale=1.5">
+<title>Exit Interview（部屋サーバー）のしくみ</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 1200px; height: 675px; overflow: hidden; background: #F6F7F4; color: #1E2B2B; font: 15px/1.5 "Yu Gothic UI", "Segoe UI", "Noto Sans CJK JP", sans-serif; padding: 34px 44px; }
+  h1 { font-size: 24px; } .lead { color: #56635F; margin-top: 4px; }
+  .stage { position: relative; height: 470px; margin-top: 24px; }
+  .phone { position: absolute; top: 70px; width: 214px; height: 140px; border-radius: 22px; background: #101316; padding: 8px; box-shadow: 0 10px 26px rgba(0,0,0,.18); }
+  .phone .sc { width: 100%; height: 100%; border-radius: 15px; background: #000; color: #E9E4D2; display: grid; place-items: center; text-align: center; font-size: 13px; }
+  .phone .sc b { color: #F0D98A; font-weight: 400; font-size: 17px; display: block; }
+  .phone.l { left: 0; } .phone.r { right: 0; }
+  .who { position: absolute; top: 222px; width: 214px; text-align: center; color: #56635F; font-size: 14px; }
+  .who.l { left: 0; } .who.r { right: 0; }
+  .server { position: absolute; left: 50%; top: 40px; transform: translateX(-50%); width: 400px; border-radius: 18px; background: #fff; border: 2px solid #2E4A49; padding: 16px 18px; box-shadow: 0 8px 24px rgba(46,74,73,.14); }
+  .server h2 { font-size: 17px; color: #2E4A49; display: flex; align-items: center; gap: 8px; }
+  .server h2 i { width: 12px; height: 12px; border-radius: 50%; background: #2F9E6E; display: inline-block; }
+  .server ul { list-style: none; margin-top: 8px; }
+  .server li { padding-left: 16px; position: relative; color: #3B4A47; font-size: 14px; margin-bottom: 4px; }
+  .server li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: #2E4A49; }
+  .chips { display: flex; gap: 6px; margin-top: 10px; white-space: nowrap; }
+  .chips span { background: #EAF1EE; color: #2E4A49; border-radius: 6px; padding: 1px 8px; font-size: 12.5px; }
+  svg.arrows { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .lab { position: absolute; background: #F6F7F4; color: #2E4A49; font-size: 13.5px; padding: 0 6px; }
+  .call { position: absolute; left: 50%; transform: translateX(-50%); bottom: 18px; width: 980px; background: #fff; border: 1px solid #DDE3E0; white-space: nowrap; border-radius: 14px; padding: 12px 18px; display: flex; gap: 26px; justify-content: center; color: #3B4A47; font-size: 14px; }
+  .call b { color: #2E4A49; }
+</style></head>
+<body>
+<h1>部屋サーバーのしくみ</h1>
+<div class="lead">このアプリは画面のないサーバーです。2 台のスマホの「Exit Interview」をつなぎ、同じ部屋の進み具合をそろえます。</div>
+<div class="stage">
+  <svg class="arrows" viewBox="0 0 1112 470">
+    <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2E4A49"/></marker></defs>
+    <path d="M218 140 C 290 140, 300 128, 352 126" fill="none" stroke="#2E4A49" stroke-width="2.4" marker-start="url(#a)" marker-end="url(#a)"/>
+    <path d="M894 140 C 822 140, 812 128, 760 126" fill="none" stroke="#2E4A49" stroke-width="2.4" marker-start="url(#a)" marker-end="url(#a)"/>
+  </svg>
+  <span class="lab" style="left:212px;top:150px;width:150px;text-align:center">1 秒ごとに<br>小さくやり取り</span>
+  <span class="lab" style="left:752px;top:150px;width:150px;text-align:center">同じ合言葉なら<br>同じ部屋に入る</span>
+  <div class="phone l"><div class="sc"><div><b>合言葉の部屋</b>相棒が来ました</div></div></div>
+  <div class="who l">スマホ 1（あなた）</div>
+  <div class="server">
+    <h2><i></i>部屋サーバー</h2>
+    <ul><li>合言葉から決まる部屋に 2 人を入れる</li><li>部屋の状態（見えているもの・持ち物）を預かる</li><li>謎の中身は持たない</li><li>30 日操作のない部屋は自動で消える</li></ul>
+    <div class="chips"><span>AWS Lambda（Python）</span><span>関数 URL</span><span>DynamoDB</span></div>
+  </div>
+  <div class="phone r"><div class="sc"><div><b>合言葉の部屋</b>相棒が来ました</div></div></div>
+  <div class="who r">スマホ 2（相棒）</div>
+  <div class="call"><span>📞 2 人は通話しながら遊ぶ</span><span><b>配置</b>：KsanHub の「AWS に配置」で更新</span><span><b>設定</b>：アドレスはアプリに入っているので不要</span></div>
+</div>
+</body></html>

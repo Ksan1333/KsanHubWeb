@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=390,height=844,scale=2">
+<title>Basho（Web版）記録</title>
+<script src="_photo.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 390px; height: 844px; overflow: hidden; background: #FFFDF6; color: #3A3226; font: 15px/1.5 "Zen Kaku Gothic New", "Hiragino Sans", "Noto Sans CJK JP", sans-serif; position: relative; }
+  .hd { padding: 14px 18px 10px; background: #FFF4CC; }
+  .hd .b { color: #6B6253; font-size: 13px; }
+  .hd h1 { font-size: 22px; }
+  .hd .d { color: #6B6253; font-size: 13px; }
+  .seg { display: flex; gap: 6px; padding: 12px 16px 6px; }
+  .seg span { padding: 5px 14px; border-radius: 999px; background: #F6EEDB; font-size: 13.5px; font-weight: 700; color: #6B6253; }
+  .seg .on { background: #3A3226; color: #fff; }
+  .days { display: flex; gap: 6px; padding: 6px 16px 10px; }
+  .days span { padding: 4px 12px; border-radius: 12px; border: 1px solid #E5DCC6; font-size: 13px; background: #fff; }
+  .days .on { background: #F2C230; border-color: #F2C230; font-weight: 700; }
+  .tl { padding: 0 16px; position: relative; }
+  .tl::before { content: ""; position: absolute; left: 62px; top: 6px; bottom: 0; width: 2px; background: #EFE6D2; }
+  .ev { display: flex; gap: 10px; margin-bottom: 12px; position: relative; }
+  .ev .t { width: 38px; font-size: 13px; color: #6B6253; padding-top: 10px; text-align: right; flex: none; }
+  .ev .dot { width: 12px; height: 12px; border-radius: 50%; background: #F2C230; border: 2px solid #fff; box-shadow: 0 0 0 2px #F2C230; margin-top: 14px; flex: none; z-index: 1; }
+  .ev .c { flex: 1; background: #fff; border: 1px solid #E5DCC6; border-radius: 14px; padding: 9px 12px; }
+  .ev .c b { display: block; }
+  .ev .c small { color: #6B6253; font-size: 12.5px; }
+  .ev .ph { display: flex; gap: 4px; margin-top: 7px; }
+  .ev .ph div { width: 64px; height: 48px; border-radius: 8px; overflow: hidden; }
+  .money { float: right; font-weight: 700; color: #4E8A5B; }
+  .add { position: absolute; right: 16px; bottom: 96px; background: #F2C230; border-radius: 999px; padding: 10px 18px; font-weight: 700; box-shadow: 0 3px 0 #D9A916; }
+  .tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 78px; background: #fff; border-top: 1px solid #E5DCC6; display: flex; padding: 8px 6px 18px; }
+  .tabs div { flex: 1; display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #6B6253; gap: 2px; }
+  .tabs .on { color: #3A3226; font-weight: 700; }
+  .tabs .on svg { background: #FFF0B8; border-radius: 10px; }
+  .tabs svg { width: 34px; height: 26px; padding: 2px 6px; }
+</style></head>
+<body>
+<div class="hd"><div class="b">‹ 旅の記録</div><h1>海沿いの町 2泊3日</h1><div class="d">2026/11/21 – 11/23 ・ 仲間 3 人 ・ 写真 64</div></div>
+<div class="seg"><span>準備</span><span>計画</span><span class="on">記録</span></div>
+<div class="days"><span>すべて</span><span class="on">1日目 11/21</span><span>2日目</span><span>3日目</span></div>
+<div class="tl">
+  <div class="ev"><span class="t">9:40</span><span class="dot"></span><div class="c"><b>駅に集合・出発 🚃</b><small>特急で 2 時間。駅弁を買った</small><span class="money">¥1,280</span></div></div>
+  <div class="ev"><span class="t">12:10</span><span class="dot"></span><div class="c"><b>港の食堂でお昼</b><small>海鮮丼。3 人で割り勘</small><span class="money">¥5,400</span><div class="ph"><div data-photo="611" data-kind="food"></div><div data-photo="612" data-kind="food"></div></div></div></div>
+  <div class="ev"><span class="t">14:00</span><span class="dot"></span><div class="c"><b>灯台まで散歩</b><small>坂の上から海が見えた</small><div class="ph"><div data-photo="613" data-kind="sea"></div><div data-photo="614" data-kind="sea"></div><div data-photo="615" data-kind="mountain"></div></div></div></div>
+  <div class="ev"><span class="t">17:30</span><span class="dot"></span><div class="c"><b>宿にチェックイン</b><small>夕日がきれいだった 🌅</small><span class="money">¥42,000</span></div></div>
+</div>
+<div class="add">＋ 出来事を追加</div>
+<nav class="tabs">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5 12 5l8 6.5V20H4z"/></svg>ホーム</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 4 3.5 6v14L9 18l6 2 5.5-2V4L15 6z M9 4v14M15 6v14"/></svg>地図</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m4 17 5-4.5 4 3.5 3-2.5 4 3.5"/></svg>写真</div>
+  <div class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 4v16M7 7h10M7 12h7M7 17h9"/></svg>記録</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="6" width="17" height="12" rx="2"/><circle cx="12" cy="12" r="2.4"/></svg>支払い</div>
+</nav>
+<script>fillPhotos();</script>
+</body></html>

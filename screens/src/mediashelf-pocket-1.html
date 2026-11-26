@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="shot" content="width=390,height=844,scale=2">
+<title>MediaShelf Pocket</title>
+<script src="_photo.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { width: 390px; height: 844px; overflow: hidden; background: #000; color: #fff; font: 14px/1.4 "Roboto", "Noto Sans CJK JP", sans-serif; position: relative; }
+  .sb { height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; font-size: 13px; font-weight: 600; }
+  .sb i { display: inline-block; width: 15px; height: 9px; border: 1.5px solid #fff; border-radius: 2px; margin-left: 5px; position: relative; }
+  .sb i::after { content: ""; position: absolute; inset: 1px 4px 1px 1px; background: #fff; }
+  .top { display: flex; align-items: flex-end; padding: 6px 16px 8px; background: linear-gradient(#0A0A0B, rgba(10,10,11,.85)); }
+  .top h1 { font-size: 30px; font-weight: 700; }
+  .top .count { color: #8E8E93; font-size: 13px; margin: 0 0 6px 8px; }
+  .top .icons { margin-left: auto; display: flex; gap: 10px; margin-bottom: 4px; }
+  .top .icons span { height: 32px; min-width: 32px; padding: 0 12px; border-radius: 16px; background: #2C2C2E; display: grid; place-items: center; font-size: 13px; }
+  .chips { display: flex; gap: 8px; padding: 2px 16px 10px; overflow: hidden; }
+  .chips span { padding: 5px 12px; border-radius: 15px; background: #1C1C1E; color: #AEAEB2; font-size: 13px; white-space: nowrap; }
+  .chips .on { background: #0A84FF; color: #fff; }
+  .day { display: flex; justify-content: space-between; padding: 8px 16px 6px; font-size: 15px; font-weight: 700; }
+  .day small { color: #8E8E93; font-weight: 400; font-size: 13px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; }
+  .grid div { aspect-ratio: 1; position: relative; overflow: hidden; }
+  .grid .v::after { content: attr(data-t); position: absolute; right: 4px; bottom: 3px; font-size: 11px; font-weight: 600; text-shadow: 0 1px 3px #000; }
+  .grid .g::after { content: "GIF"; position: absolute; left: 4px; bottom: 3px; font-size: 10px; font-weight: 700; background: rgba(0,0,0,.55); border-radius: 4px; padding: 0 3px; }
+  .grid .s::before { content: ""; position: absolute; right: 5px; top: 5px; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid #fff; background: rgba(0,0,0,.25); z-index: 1; }
+  .bar { position: absolute; left: 14px; right: 14px; bottom: 22px; height: 64px; border-radius: 32px; background: rgba(40,40,44,.62); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(18px) saturate(160%); box-shadow: 0 8px 30px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.18); display: flex; align-items: center; padding: 0 6px; }
+  .bar div { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10.5px; color: #AEAEB2; }
+  .bar .on { color: #0A84FF; }
+  .bar .on::before { content: ""; position: absolute; width: 70px; height: 52px; border-radius: 26px; background: rgba(255,255,255,.12); margin-top: -6px; }
+  .bar svg { width: 22px; height: 22px; }
+  .scroll { position: absolute; right: 3px; top: 300px; height: 64px; width: 4px; border-radius: 2px; background: rgba(255,255,255,.45); }
+</style></head>
+<body>
+<div class="sb"><span>10:24</span><span>▾ ▴ <i></i></span></div>
+<div class="top"><h1>ホーム</h1><span class="count">2,416 件</span><div class="icons"><span>⌕</span><span>選択</span></div></div>
+<div class="chips"><span class="on">すべて</span><span>写真</span><span>動画</span><span>GIF</span><span>お気に入り</span><span>AI タグ</span></div>
+<div class="day">11月24日（月）<small>9 件</small></div>
+<div class="grid">
+  <div data-photo="301" data-kind="sea"></div><div data-photo="302" data-kind="mountain" class="v" data-t="0:42"></div><div data-photo="303" data-kind="food"></div><div data-photo="304" data-kind="city"></div>
+  <div data-photo="305" data-kind="forest" class="g"></div><div data-photo="306" data-kind="snow"></div><div data-photo="307" data-kind="field"></div><div data-photo="308" data-kind="night" class="v" data-t="1:15"></div>
+  <div data-photo="309" data-kind="room"></div>
+</div>
+<div class="day">11月22日（土）<small>14 件</small></div>
+<div class="grid">
+  <div data-photo="311" data-kind="mountain"></div><div data-photo="312" data-kind="mountain"></div><div data-photo="313" data-kind="sea" class="v" data-t="2:08"></div><div data-photo="314" data-kind="food"></div>
+  <div data-photo="315" data-kind="field"></div><div data-photo="316" data-kind="forest"></div><div data-photo="317" data-kind="city" class="g"></div><div data-photo="318" data-kind="night"></div>
+  <div data-photo="319" data-kind="snow"></div><div data-photo="320" data-kind="sea"></div><div data-photo="321" data-kind="room"></div><div data-photo="322" data-kind="field" class="v" data-t="0:19"></div>
+  <div data-photo="323" data-kind="mountain"></div><div data-photo="324" data-kind="food"></div><div data-photo="325" data-kind="forest"></div><div data-photo="326" data-kind="city"></div>
+</div>
+<div class="scroll"></div>
+<nav class="bar">
+  <div class="on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z" opacity=".95"/></svg>ホーム</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6.5h6l2 2h10V19H3z"/></svg>フォルダ</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg>動画</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM13 4h5.5A1.5 1.5 0 0 1 20 5.5v13a1.5 1.5 0 0 1-1.5 1.5H13z"/></svg>本</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>設定</div>
+</nav>
+<script>fillPhotos();</script>
+</body></html>
