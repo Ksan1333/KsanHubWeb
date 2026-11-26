@@ -113,16 +113,38 @@ window.KSANHUB_SCREENS = {
   {
    "title": "メディア別",
    "src": "screens/mediashelf-1.webp",
-   "w": 1600,
-   "h": 1000,
-   "frame": "bare"
+   "w": 1280,
+   "h": 800,
+   "frame": "bare",
+   "real": true,
+   "note": "アプリの見本のライブラリ（架空）で描いた本物の画面です"
   },
   {
-   "title": "作者別",
+   "title": "マンガを読む",
    "src": "screens/mediashelf-2.webp",
-   "w": 1600,
-   "h": 1000,
-   "frame": "bare"
+   "w": 1280,
+   "h": 800,
+   "frame": "bare",
+   "real": true,
+   "note": "アプリの見本のライブラリ（架空）で描いた本物の画面です"
+  },
+  {
+   "title": "音声を聴く",
+   "src": "screens/mediashelf-3.webp",
+   "w": 1280,
+   "h": 800,
+   "frame": "bare",
+   "real": true,
+   "note": "アプリの見本のライブラリ（架空）で描いた本物の画面です"
+  },
+  {
+   "title": "集める（YouTube）",
+   "src": "screens/mediashelf-4.webp",
+   "w": 1280,
+   "h": 800,
+   "frame": "bare",
+   "real": true,
+   "note": "アプリの見本のライブラリ（架空）で描いた本物の画面です"
   }
  ],
  "instavault": [

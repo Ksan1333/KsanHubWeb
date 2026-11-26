@@ -46,7 +46,7 @@ node tools/sync-catalog.mjs --check    # 写した内容が今の catalog.json �
 
 3. `data/screens.js` に足す。`frame` は枠の種類（`bare`：そのまま・`window`：Windows の窓・`browser`：ブラウザー・`phone`：スマホ・`land`：横持ちのスマホ）、本物の画面には `real: true` を付ける。
 
-本物の画面は、それぞれのアプリをブラウザーや確認用のサーバーで動かし、架空のデータを入れて撮っています（ReviewInsight・Kurashi・Notoha・Kiln・Iori・MediaRelay・カルダシェフ文明マップ）。WPF・Android のアプリ（MediaShelf・InstaVault・KsanHub・MediaShelf Pocket・CableCheck・KsanHub Android・MediaRelay Android・Exit Interview）と Basho は、実際の画面の作りをもとに HTML で再現しています。Exit Interview は、タイトルと合言葉の画面だけです（謎やステージは出しません）。
+本物の画面は、それぞれのアプリをブラウザーや確認用のサーバーで動かし、架空のデータを入れて撮っています（ReviewInsight・Kurashi・Notoha・Kiln・Iori・MediaRelay・カルダシェフ文明マップ）。MediaShelf は、アプリの見本のライブラリ（架空）で描いた画面（MediaShelf の `docs/devlog/img` にあるもの）を使っています。ほかの WPF・Android のアプリ（InstaVault・KsanHub・MediaShelf Pocket・CableCheck・KsanHub Android・MediaRelay Android・Exit Interview）と Basho は、実際の画面の作りをもとに HTML で再現しています。Exit Interview は、タイトルと合言葉の画面だけです（謎やステージは出しません）。
 
 ## 公開のしかた
 
